@@ -5,30 +5,27 @@ import classes from './Map.module.css';
 
 
 class Map extends Component {
+    state = {
+        lat: 51.505,
+        lng: -0.09,
+        zoom: 13,
+      }
+
     render(){
+        const position = [this.state.lat, this.state.lng]
+
         return(
             <div className={classes.leafletContainer}>
-                <LeafletMap
-                    center={[50, 10]}
-                    zoom={6}
-                    maxZoom={10}
-                    attributionControl={true}
-                    zoomControl={true}
-                    doubleClickZoom={true}
-                    scrollWheelZoom={true}
-                    dragging={true}
-                    animate={true}
-                    easeLinearity={0.35}
-                    >
-                    <TileLayer
-                    url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
-                    />
-                    <Marker position={[50, 10]}>
+                <Map center={position} zoom={this.state.zoom}>
+                <TileLayer
+          url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+        />
+                    <Marker position={position}>
                     <Popup>
-                        Popup for any custom information.
+                        A pretty CSS3 popup. <br /> Easily customizable.
                     </Popup>
                     </Marker>
-                </LeafletMap>
+                </Map>
             </div>
         )
     }
